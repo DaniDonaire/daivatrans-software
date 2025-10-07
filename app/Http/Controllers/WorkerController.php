@@ -32,34 +32,40 @@ class WorkerController extends Controller
 
     public function create()
     {
-        return view('trabajadores.create');
+        return view('workers.create');
     }
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => ['required','string','max:120'],
-            'surname'=> ['required','string','max:150'],
-            'dni'=> ['required','string','max:20','unique:workers,dni'],
-            'telefono'=> ['nullable','string','max:30'],
-            'email'=> ['nullable','email','max:255','unique:workers,email'],
-            'seguridad_social'=> ['required','string','max:30','unique:workers,seguridad_social'],
-            'cuenta_bancaria'=> ['required','string','max:34'],
-            'observaciones'=> ['nullable','string'],
+        $validated = $request->validate([
+            'name' => 'required|min:2|max:255',
+            'surname' => 'required|min:2|max:255',
+            'dni' => 'required|unique:workers,dni|min:9|max:9',
+            'telefono' => 'nullable|min:9|max:15',
+            'email' => 'nullable|email|unique:workers,email|max:255',
+            'seguridad_social' => 'required|unique:workers,seguridad_social|min:12|max:12',
+            'cuenta_bancaria' => 'nullable|min:20|max:34', // Para IBAN
+            'observaciones' => 'nullable|max:1000',
         ]);
-        $worker = Worker::create($data);
 
-        return redirect()->route('trabajadores.show', $worker)->with('ok', 'Trabajador creado.'); 
+        Worker::create($validated);
+
+        return redirect()->route('workers.index')
+            ->with('sweetalert', [
+                'title' => __('workers.created'),
+                'text' => '',
+                'type' => 'success'
+            ]);
     }
 
     public function show(Worker $trabajador)
     {
-        return view('trabajadores.show', compact('trabajador'));
+        return view('workers.show', compact('trabajador'));
     }
 
     public function edit(Worker $trabajador)
     {
-        return view('trabajadores.edit', compact('trabajador'));
+        return view('workers.edit', compact('trabajador'));
     }
 
    public function update(Request $request, Worker $trabajador)
@@ -77,7 +83,7 @@ class WorkerController extends Controller
 
         $trabajador->update($data);
 
-        return redirect()->route('trabajadores.show', $trabajador)->with('ok','Trabajador actualizado.');
+        return redirect()->route('workers.show', $trabajador)->with('ok','Trabajador actualizado.');
     }
 
     public function destroy(Worker $trabajador)
