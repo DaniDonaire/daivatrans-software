@@ -1,0 +1,8 @@
+/* Forzar que el botón esté siempre visible cuando esta html data-sidebar-size="{{ $sidebarSize }} en lg y active*/
+html[data-sidebar-size="lg"] .navbar-menu .btn-vertical-sm-hover {
+    display: inline-flex !important;
+}
+ .navbar-menu .btn-vertical-sm-hover-active {
+    display: inline-flex !important;
+}
+
