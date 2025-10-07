@@ -13,6 +13,7 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactMethodController;
 use App\Http\Controllers\PreferenceController;
+use App\Http\Controllers\WorkerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +104,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/preferences', [PreferenceController::class, 'update'])
         ->name('preferences.update');
 });
+
+// Trabajadores
+
+Route::get('/trabajadores', [WorkerController::class,'index'])->name('trabajadores.index');
 
 
 // ↓↓↓ IMPORATANTE PONER LAS RUTAS ENCIMA DE ESTA ↓↓↓
