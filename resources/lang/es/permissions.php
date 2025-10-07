@@ -57,4 +57,24 @@ return [
         'display_name' => 'Listar Configuraciones',
         'description' => 'Permite ver la lista de configuraciones.',
     ],
+    'workers_list' => [
+        'display_name' => 'Listar Trabajadores',
+        'description' => 'Permite ver la lista de trabajadores.',
+    ],
+    'workers_show' => [
+        'display_name' => 'Ver Detalles del Trabajador',
+        'description' => 'Permite ver los detalles de un trabajador específico.',
+    ],
+    'workers_create' => [
+        'display_name' => 'Crear Trabajadores',
+        'description' => 'Permite crear nuevos trabajadores.',
+    ],
+    'workers_edit' => [
+        'display_name' => 'Editar Trabajadores',
+        'description' => 'Permite editar la información de trabajadores.',
+    ],
+    'workers_destroy' => [
+        'display_name' => 'Eliminar Trabajadores',
+        'description' => 'Permite eliminar trabajadores del sistema.',
+    ],
 ];
