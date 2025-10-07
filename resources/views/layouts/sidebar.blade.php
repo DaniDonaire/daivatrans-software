@@ -112,6 +112,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link menu-link {{ request()->routeIs('trabajadores.*') ? 'active' : '' }}"
+                    href="{{ route('trabajadores.index') }}">
+                        <i class="ri-briefcase-line"></i> <span>Trabajadores</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                         <i class="las la-tachometer-alt"></i> <span>@lang('translation.dashboards')</span>
                     </a>
