@@ -113,7 +113,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link menu-link <?php echo e(request()->routeIs('trabajadores.*') ? 'active' : ''); ?>"
-                    href="<?php echo e(route('trabajadores.index')); ?>">
+                    href="<?php echo e(route('workers.index')); ?>">
                         <i class="ri-briefcase-line"></i> <span>Trabajadores</span>
                     </a>
                 </li>

@@ -107,7 +107,7 @@ Route::middleware(['auth'])->group(function () {
 
 // Trabajadores
 
-Route::get('/trabajadores', [WorkerController::class,'index'])->name('trabajadores.index');
+Route::get('/trabajadores', [WorkerController::class,'index'])->name('workers.index');
 
 
 // ↓↓↓ IMPORATANTE PONER LAS RUTAS ENCIMA DE ESTA ↓↓↓

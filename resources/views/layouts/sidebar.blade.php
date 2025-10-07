@@ -113,7 +113,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ request()->routeIs('trabajadores.*') ? 'active' : '' }}"
-                    href="{{ route('trabajadores.index') }}">
+                    href="{{ route('workers.index') }}">
                         <i class="ri-briefcase-line"></i> <span>Trabajadores</span>
                     </a>
                 </li>

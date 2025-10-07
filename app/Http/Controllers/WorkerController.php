@@ -10,11 +10,25 @@ use App\Models\Worker;
 class WorkerController extends Controller
 {
     public function index(Request $request)
-    {
-        $trabajadores = Worker::orderBy('surname')->orderBy('name')->get();
-        //dd($trabajadores);
-        return view('trabajadores.index', compact('trabajadores'));
+{
+    $perPage = $request->input('perPage', 10);
+    $search = $request->input('search');
+
+    $query = Worker::query();
+
+    if ($search) {
+        $query->where(function ($q) use ($search) {
+            $q->where('name', 'like', "%{$search}%")
+              ->orWhere('surname', 'like', "%{$search}%")
+              ->orWhere('dni', 'like', "%{$search}%")
+              ->orWhere('email', 'like', "%{$search}%");
+        });
     }
+
+    $trabajadores = $query->paginate($perPage);
+
+    return view('workers.index', compact('trabajadores'));
+}
 
     public function create()
     {
@@ -70,7 +84,7 @@ class WorkerController extends Controller
     {
         $trabajador->delete();
 
-        return redirect()->route('trabajadores.index')->with('ok', 'Trabajador eliminado.');
+        return redirect()->route('workers.index')->with('ok', 'Trabajador eliminado.');
     }
 
 }
