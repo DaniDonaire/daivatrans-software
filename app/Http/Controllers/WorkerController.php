@@ -63,16 +63,33 @@ class WorkerController extends Controller
 
     public function update(Request $request, Worker $worker)
     {
-        $data = $request->validate([
+        $data = $request->validate(
+        [
             'name'              => 'required|string|max:255',
             'surname'           => 'required|string|max:255',
             'dni'               => 'required|string|size:9|unique:workers,dni,' . $worker->id,
             'telefono'          => 'nullable|string|min:9|max:15',
-            'email'             => 'nullable|email|max:255|unique:workers,email,' . $worker->id,
+            'email'             => 'required|email|max:255|unique:workers,email,' . $worker->id,
             'seguridad_social'  => 'required|string|size:12|unique:workers,seguridad_social,' . $worker->id,
             'cuenta_bancaria'   => 'nullable|string|min:20|max:34', // igual que en store
             'observaciones'     => 'nullable|string|max:1000',
-        ]);
+        ],
+        [
+            'dni.size'                 => 'El DNI debe tener :size caracteres.',
+            'seguridad_social.size'    => 'El Nº de Seguridad Social debe tener :size dígitos.',
+            'telefono.min'             => 'El teléfono debe tener al menos :min caracteres.',
+            'telefono.max'             => 'El teléfono no puede superar :max caracteres.',
+            'cuenta_bancaria.min'      => 'El IBAN debe tener al menos :min caracteres.',
+            'cuenta_bancaria.max'      => 'El IBAN no puede superar :max caracteres.',
+            'email.email'              => 'Introduce un correo válido.',
+            'email.required'           => 'El correo es obligatorio.',
+            'email.unique'             => 'Este correo ya está registrado.',
+            'dni.unique'               => 'Este DNI ya existe.',
+            'seguridad_social.unique'  => 'Ese Nº de Seguridad Social ya existe.',
+            'name.required'            => 'El nombre es obligatorio.',
+            'surname.required'         => 'Los apellidos son obligatorios.',
+        ]
+    );
 
         $worker->update($data);
 

@@ -17,10 +17,10 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('surname');
-            $table->string('dni', 20)->unique();
-            $table->string('telefono', 30)->nullable();
+            $table->string('dni', 9)->unique();
+            $table->string('telefono', 15)->nullable();
             $table->string('email')->unique();
-            $table->string('seguridad_social', 30)->unique();
+            $table->string('seguridad_social', 12)->unique();
             $table->text('cuenta_bancaria');
             $table->text('observaciones')->nullable();
 
