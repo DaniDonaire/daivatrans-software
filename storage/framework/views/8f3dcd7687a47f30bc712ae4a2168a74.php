@@ -86,7 +86,8 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
                        value="<?php echo e(old('dni')); ?>"
-                       placeholder="<?php echo app('translator')->get('workers.dni_placeholder'); ?>">
+                       placeholder="<?php echo app('translator')->get('workers.dni_placeholder'); ?>"
+                       minlength="9" maxlength="9" pattern=".{9}">
                 <?php $__errorArgs = ['dni'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -99,7 +100,7 @@ unset($__errorArgs, $__bag); ?>
 
               <div class="col-md-6">
                 <label for="telefono" class="form-label"><?php echo app('translator')->get('workers.phone_label'); ?></label>
-                <input type="text" id="telefono" name="telefono"
+                <input type="tel" id="telefono" name="telefono"
                        class="form-control <?php $__errorArgs = ['telefono'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -151,8 +152,8 @@ unset($__errorArgs, $__bag); ?>
             <div class="row g-3 mt-0">
               <div class="col-md-6">
                 <label for="seguridad_social" class="form-label"><?php echo app('translator')->get('workers.seguridad_social_label'); ?></label>
-                <input type="text" id="seguridad_social" name="seguridad_social"
-                       class="form-control <?php $__errorArgs = ['seguridad_social'];
+      <input type="text" id="seguridad_social" name="seguridad_social"
+        class="form-control <?php $__errorArgs = ['seguridad_social'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -160,8 +161,9 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                       value="<?php echo e(old('seguridad_social')); ?>"
-                       placeholder="<?php echo app('translator')->get('workers.seguridad_social_placeholder'); ?>">
+        value="<?php echo e(old('seguridad_social')); ?>"
+        placeholder="<?php echo app('translator')->get('workers.seguridad_social_placeholder'); ?>"
+        minlength="12" maxlength="12" pattern=".{12}" title="Debe tener exactamente 12 caracteres">
                 <?php $__errorArgs = ['seguridad_social'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

@@ -51,13 +51,14 @@
                 <input type="text" id="dni" name="dni"
                        class="form-control @error('dni') is-invalid @enderror"
                        value="{{ old('dni') }}"
-                       placeholder="@lang('workers.dni_placeholder')">
+                       placeholder="@lang('workers.dni_placeholder')"
+                       minlength="9" maxlength="9" pattern=".{9}">
                 @error('dni') <div class="invalid-feedback">{{ $message }}</div> @enderror
               </div>
 
               <div class="col-md-6">
                 <label for="telefono" class="form-label">@lang('workers.phone_label')</label>
-                <input type="text" id="telefono" name="telefono"
+                <input type="tel" id="telefono" name="telefono"
                        class="form-control @error('telefono') is-invalid @enderror"
                        value="{{ old('telefono') }}"
                        placeholder="@lang('workers.phone_placeholder')">
@@ -81,10 +82,11 @@
             <div class="row g-3 mt-0">
               <div class="col-md-6">
                 <label for="seguridad_social" class="form-label">@lang('workers.seguridad_social_label')</label>
-                <input type="text" id="seguridad_social" name="seguridad_social"
-                       class="form-control @error('seguridad_social') is-invalid @enderror"
-                       value="{{ old('seguridad_social') }}"
-                       placeholder="@lang('workers.seguridad_social_placeholder')">
+      <input type="text" id="seguridad_social" name="seguridad_social"
+        class="form-control @error('seguridad_social') is-invalid @enderror"
+        value="{{ old('seguridad_social') }}"
+        placeholder="@lang('workers.seguridad_social_placeholder')"
+        minlength="12" maxlength="12" pattern=".{12}" title="Debe tener exactamente 12 caracteres">
                 @error('seguridad_social') <div class="invalid-feedback">{{ $message }}</div> @enderror
               </div>
 
