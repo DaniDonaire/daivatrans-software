@@ -47,6 +47,7 @@ class WorkerController extends Controller
         ],
         [
             'dni.size'                 => 'El DNI debe tener :size caracteres.',
+            'dni.required'              => 'El DNI es obligatorio.',
             'seguridad_social.size'    => 'El Nº de Seguridad Social debe tener :size dígitos.',
             'telefono.min'             => 'El teléfono debe tener al menos :min caracteres.',
             'telefono.max'             => 'El teléfono no puede superar :max caracteres.',
@@ -57,6 +58,7 @@ class WorkerController extends Controller
             'email.unique'             => 'Este correo ya está registrado.',
             'dni.unique'               => 'Este DNI ya existe.',
             'seguridad_social.unique'  => 'Ese Nº de Seguridad Social ya existe.',
+            'seguridad_social.required' => 'El Nº de Seguridad Social es obligatorio.',
             'name.required'            => 'El nombre es obligatorio.',
             'surname.required'         => 'Los apellidos son obligatorios.',
         ]);
@@ -91,7 +93,9 @@ class WorkerController extends Controller
         ],
         [
             'dni.size'                 => 'El DNI debe tener :size caracteres.',
+            'dni.required'              => 'El DNI es obligatorio.',
             'seguridad_social.size'    => 'El Nº de Seguridad Social debe tener :size dígitos.',
+            'seguridad_social.required' => 'El Nº de Seguridad Social es obligatorio.',
             'telefono.min'             => 'El teléfono debe tener al menos :min caracteres.',
             'telefono.max'             => 'El teléfono no puede superar :max caracteres.',
             'cuenta_bancaria.min'      => 'El IBAN debe tener al menos :min caracteres.',
