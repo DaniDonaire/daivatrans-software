@@ -30,11 +30,11 @@
         <a href="{{ url('/') }}" class="logo logo-light">
             <span class="logo-sm">
                 @if($logo)
-                <!-- Mostrar logo cuadrado si existe -->
+                    <!-- Mostrar logo cuadrado si existe -->
                     <img src="{{ config('settings.logo_square') ? asset('storage/' . config('settings.logo_square')) : asset('build/images/WCD_TG_White.png') }}" height="20">
                 @else
-                <!-- Mostrar logo predeterminado -->
-                <i class="ri-home-smile-line" style="font-size: 24px; color: #fff;"></i>
+                    <!-- Mostrar logo predeterminado -->
+                    <i class="ri-home-smile-line" style="font-size: 24px; color: #fff;"></i>
                 @endif
             </span>
             <span class="logo-lg">
@@ -54,10 +54,11 @@
     <div id="scrollbar">
         <div class="container-fluid">
 
-            <div id="two-column-menu">
-            </div>
+            <div id="two-column-menu"></div>
             <ul class="navbar-nav" id="navbar-nav">
-                <li class="menu-title"><span>@lang('translation.menu')</span></li>
+                <!-- Cambiado a “Gestión de usuarios” -->
+                <li class="menu-title"><span>Gestión de usuarios</span></li>
+
                 @can('users_list')
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('users.index') }}">
@@ -87,33 +88,13 @@
                     </li>
                 @endcan
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('leads.index') }}">
-                        <i class="ri-user-add-line"></i> <span>Leads</span>
-                    </a>
-                </li>
+                <!-- Nuevo separador: Gestión de negocio -->
+                <li class="menu-title"><span>Gestión de negocio</span></li>
 
+                <!-- Trabajadores -->
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('services.index') }}">
-                        <i class="ri-team-line"></i> <span>Servicios</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('contact-methods.index') }}">
-                        <i class="ri-mail-send-line"></i> <span>Métodos de Contacto</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('status.index') }}">
-                        <i class="ri-palette-line"></i> <span>Estatus</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link {{ request()->routeIs('trabajadores.*') ? 'active' : '' }}"
-                    href="{{ route('workers.index') }}">
+                    <a class="nav-link menu-link {{ request()->routeIs('workers.*') ? 'active' : '' }}"
+                       href="{{ route('workers.index') }}">
                         <i class="ri-briefcase-line"></i> <span>Trabajadores</span>
                     </a>
                 </li>
@@ -140,7 +121,7 @@
                                 <a href="dashboard-projects" class="nav-link">@lang('translation.projects')</a>
                             </li>
                             <li class="nav-item">
-                                <a href="dashboard-nft" class="nav-link"> @lang('translation.nft') </a>
+                                <a href="dashboard-nft" class="nav-link">@lang('translation.nft')</a>
                             </li>
                             <li class="nav-item">
                                 <a href="dashboard-job" class="nav-link">@lang('translation.job')</a>
@@ -148,6 +129,7 @@
                         </ul>
                     </div>
                 </li> <!-- end Dashboard Menu -->
+
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
                         <i class="lab la-delicious"></i> <span>@lang('translation.apps')</span>
@@ -405,22 +387,6 @@
                                             </div>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#sidebarCandidatelists" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCandidatelists">
-                                                @lang('translation.candidate-lists')
-                                            </a>
-                                            <div class="collapse menu-dropdown" id="sidebarCandidatelists">
-                                                <ul class="nav nav-sm flex-column">
-                                                    <li class="nav-item">
-                                                        <a href="apps-job-candidate-lists" class="nav-link"> @lang('translation.list-view')
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="apps-job-candidate-grid" class="nav-link"> @lang('translation.grid-view')</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li class="nav-item">
                                             <a href="apps-job-application" class="nav-link"> @lang('translation.application') </a>
                                         </li>
                                         <li class="nav-item">
@@ -662,9 +628,6 @@
                             <li class="nav-item">
                                 <a href="pages-sitemap" class="nav-link">@lang('translation.sitemap')</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="pages-search-results" class="nav-link">@lang('translation.search-results')</a>
-                            </li>
                               <li class="nav-item">
                                 <a href="pages-privacy-policy" class="nav-link">@lang('translation.privacy-policy')</a>
                             </li>
@@ -786,43 +749,6 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarAdvanceUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI">
-                        <i class="las la-briefcase"></i> <span>@lang('translation.advance-ui')</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarAdvanceUI">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="advance-ui-sweetalerts" class="nav-link">@lang('translation.sweet-alerts')</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-nestable" class="nav-link">@lang('translation.nestable-list')</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-scrollbar" class="nav-link">@lang('translation.scrollbar')</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-animation" class="nav-link">@lang('translation.animation')</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-tour" class="nav-link">@lang('translation.tour')</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-swiper" class="nav-link">@lang('translation.swiper-slider')</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-ratings" class="nav-link">@lang('translation.ratings')</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-highlight" class="nav-link">@lang('translation.highlight')</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-scrollspy" class="nav-link">@lang('translation.scrollSpy')</a>
-                            </li>
-                        </ul>
                     </div>
                 </li>
 

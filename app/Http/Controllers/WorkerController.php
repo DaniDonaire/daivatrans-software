@@ -36,31 +36,31 @@ class WorkerController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'              => 'required|string|min:2|max:255',
+            /*'name'              => 'required|string|min:2|max:255',
             'surname'           => 'required|string|min:2|max:255',
             'dni'               => 'required|string|size:9|unique:workers,dni',
-            'telefono'          => 'nullable|string|min:9|max:15',
-            'email'             => 'nullable|email|max:255|unique:workers,email',
-            'seguridad_social'  => 'required|string|size:12|unique:workers,seguridad_social',
+            'telefono'          => 'nullable|string|min:9|max:15',*/
+            'email'             => 'required|email|max:255|unique:workers,email',
+            /*'seguridad_social'  => 'required|string|size:12|unique:workers,seguridad_social',
             'cuenta_bancaria'   => 'nullable|string|min:20|max:34', // IBAN opcional
-            'observaciones'     => 'nullable|string|max:1000',
+            'observaciones'     => 'nullable|string|max:1000',*/
         ],
         [
-            'dni.size'                 => 'El DNI debe tener :size caracteres.',
+            /*'dni.size'                 => 'El DNI debe tener :size caracteres.',
             'dni.required'              => 'El DNI es obligatorio.',
             'seguridad_social.size'    => 'El Nº de Seguridad Social debe tener :size dígitos.',
             'telefono.min'             => 'El teléfono debe tener al menos :min caracteres.',
             'telefono.max'             => 'El teléfono no puede superar :max caracteres.',
             'cuenta_bancaria.min'      => 'El IBAN debe tener al menos :min caracteres.',
-            'cuenta_bancaria.max'      => 'El IBAN no puede superar :max caracteres.',
+            'cuenta_bancaria.max'      => 'El IBAN no puede superar :max caracteres.',*/
             'email.email'              => 'Introduce un correo válido.',
             'email.required'           => 'El correo es obligatorio.',
             'email.unique'             => 'Este correo ya está registrado.',
-            'dni.unique'               => 'Este DNI ya existe.',
+            /*'dni.unique'               => 'Este DNI ya existe.',
             'seguridad_social.unique'  => 'Ese Nº de Seguridad Social ya existe.',
             'seguridad_social.required' => 'El Nº de Seguridad Social es obligatorio.',
             'name.required'            => 'El nombre es obligatorio.',
-            'surname.required'         => 'Los apellidos son obligatorios.',
+            'surname.required'         => 'Los apellidos son obligatorios.',*/
         ]);
 
         Worker::create($data);

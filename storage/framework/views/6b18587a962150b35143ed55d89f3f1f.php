@@ -30,11 +30,11 @@
         <a href="<?php echo e(url('/')); ?>" class="logo logo-light">
             <span class="logo-sm">
                 <?php if($logo): ?>
-                <!-- Mostrar logo cuadrado si existe -->
+                    <!-- Mostrar logo cuadrado si existe -->
                     <img src="<?php echo e(config('settings.logo_square') ? asset('storage/' . config('settings.logo_square')) : asset('build/images/WCD_TG_White.png')); ?>" height="20">
                 <?php else: ?>
-                <!-- Mostrar logo predeterminado -->
-                <i class="ri-home-smile-line" style="font-size: 24px; color: #fff;"></i>
+                    <!-- Mostrar logo predeterminado -->
+                    <i class="ri-home-smile-line" style="font-size: 24px; color: #fff;"></i>
                 <?php endif; ?>
             </span>
             <span class="logo-lg">
@@ -54,10 +54,11 @@
     <div id="scrollbar">
         <div class="container-fluid">
 
-            <div id="two-column-menu">
-            </div>
+            <div id="two-column-menu"></div>
             <ul class="navbar-nav" id="navbar-nav">
-                <li class="menu-title"><span><?php echo app('translator')->get('translation.menu'); ?></span></li>
+                <!-- Cambiado a “Gestión de usuarios” -->
+                <li class="menu-title"><span>Gestión de usuarios</span></li>
+
                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('users_list')): ?>
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="<?php echo e(route('users.index')); ?>">
@@ -87,33 +88,13 @@
                     </li>
                 <?php endif; ?>
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="<?php echo e(route('leads.index')); ?>">
-                        <i class="ri-user-add-line"></i> <span>Leads</span>
-                    </a>
-                </li>
+                <!-- Nuevo separador: Gestión de negocio -->
+                <li class="menu-title"><span>Gestión de negocio</span></li>
 
+                <!-- Trabajadores -->
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="<?php echo e(route('services.index')); ?>">
-                        <i class="ri-team-line"></i> <span>Servicios</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="<?php echo e(route('contact-methods.index')); ?>">
-                        <i class="ri-mail-send-line"></i> <span>Métodos de Contacto</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="<?php echo e(route('status.index')); ?>">
-                        <i class="ri-palette-line"></i> <span>Estatus</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link <?php echo e(request()->routeIs('trabajadores.*') ? 'active' : ''); ?>"
-                    href="<?php echo e(route('workers.index')); ?>">
+                    <a class="nav-link menu-link <?php echo e(request()->routeIs('workers.*') ? 'active' : ''); ?>"
+                       href="<?php echo e(route('workers.index')); ?>">
                         <i class="ri-briefcase-line"></i> <span>Trabajadores</span>
                     </a>
                 </li>
@@ -140,7 +121,7 @@
                                 <a href="dashboard-projects" class="nav-link"><?php echo app('translator')->get('translation.projects'); ?></a>
                             </li>
                             <li class="nav-item">
-                                <a href="dashboard-nft" class="nav-link"> <?php echo app('translator')->get('translation.nft'); ?> </a>
+                                <a href="dashboard-nft" class="nav-link"><?php echo app('translator')->get('translation.nft'); ?></a>
                             </li>
                             <li class="nav-item">
                                 <a href="dashboard-job" class="nav-link"><?php echo app('translator')->get('translation.job'); ?></a>
@@ -148,6 +129,7 @@
                         </ul>
                     </div>
                 </li> <!-- end Dashboard Menu -->
+
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
                         <i class="lab la-delicious"></i> <span><?php echo app('translator')->get('translation.apps'); ?></span>
@@ -405,22 +387,6 @@
                                             </div>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#sidebarCandidatelists" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCandidatelists">
-                                                <?php echo app('translator')->get('translation.candidate-lists'); ?>
-                                            </a>
-                                            <div class="collapse menu-dropdown" id="sidebarCandidatelists">
-                                                <ul class="nav nav-sm flex-column">
-                                                    <li class="nav-item">
-                                                        <a href="apps-job-candidate-lists" class="nav-link"> <?php echo app('translator')->get('translation.list-view'); ?>
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="apps-job-candidate-grid" class="nav-link"> <?php echo app('translator')->get('translation.grid-view'); ?></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li class="nav-item">
                                             <a href="apps-job-application" class="nav-link"> <?php echo app('translator')->get('translation.application'); ?> </a>
                                         </li>
                                         <li class="nav-item">
@@ -662,9 +628,6 @@
                             <li class="nav-item">
                                 <a href="pages-sitemap" class="nav-link"><?php echo app('translator')->get('translation.sitemap'); ?></a>
                             </li>
-                            <li class="nav-item">
-                                <a href="pages-search-results" class="nav-link"><?php echo app('translator')->get('translation.search-results'); ?></a>
-                            </li>
                               <li class="nav-item">
                                 <a href="pages-privacy-policy" class="nav-link"><?php echo app('translator')->get('translation.privacy-policy'); ?></a>
                             </li>
@@ -786,43 +749,6 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarAdvanceUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI">
-                        <i class="las la-briefcase"></i> <span><?php echo app('translator')->get('translation.advance-ui'); ?></span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarAdvanceUI">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="advance-ui-sweetalerts" class="nav-link"><?php echo app('translator')->get('translation.sweet-alerts'); ?></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-nestable" class="nav-link"><?php echo app('translator')->get('translation.nestable-list'); ?></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-scrollbar" class="nav-link"><?php echo app('translator')->get('translation.scrollbar'); ?></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-animation" class="nav-link"><?php echo app('translator')->get('translation.animation'); ?></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-tour" class="nav-link"><?php echo app('translator')->get('translation.tour'); ?></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-swiper" class="nav-link"><?php echo app('translator')->get('translation.swiper-slider'); ?></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-ratings" class="nav-link"><?php echo app('translator')->get('translation.ratings'); ?></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-highlight" class="nav-link"><?php echo app('translator')->get('translation.highlight'); ?></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="advance-ui-scrollspy" class="nav-link"><?php echo app('translator')->get('translation.scrollSpy'); ?></a>
-                            </li>
-                        </ul>
                     </div>
                 </li>
 
