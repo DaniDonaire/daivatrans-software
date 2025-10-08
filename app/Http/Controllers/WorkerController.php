@@ -4,31 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Worker;
-//use App\Models\Direccion;
-//use App\Http\Requests\StoreUpdateTrabajadorRequest;
 
 class WorkerController extends Controller
 {
     public function index(Request $request)
-{
-    $perPage = $request->input('perPage', 10);
-    $search = $request->input('search');
+    {
+        $perPage = (int) $request->input('perPage', 10);
+        $search  = $request->input('search');
 
-    $query = Worker::query();
+        $query = Worker::query();
 
-    if ($search) {
-        $query->where(function ($q) use ($search) {
-            $q->where('name', 'like', "%{$search}%")
-              ->orWhere('surname', 'like', "%{$search}%")
-              ->orWhere('dni', 'like', "%{$search}%")
-              ->orWhere('email', 'like', "%{$search}%");
-        });
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('surname', 'like', "%{$search}%")
+                  ->orWhere('dni', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        $trabajadores = $query->orderBy('surname')->orderBy('name')->paginate($perPage);
+
+        return view('workers.index', compact('trabajadores'));
     }
-
-    $trabajadores = $query->paginate($perPage);
-
-    return view('workers.index', compact('trabajadores'));
-}
 
     public function create()
     {
@@ -37,60 +35,53 @@ class WorkerController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|min:2|max:255',
-            'surname' => 'required|min:2|max:255',
-            'dni' => 'required|unique:workers,dni|min:9|max:9',
-            'telefono' => 'nullable|min:9|max:15',
-            'email' => 'nullable|email|unique:workers,email|max:255',
-            'seguridad_social' => 'required|unique:workers,seguridad_social|min:12|max:12',
-            'cuenta_bancaria' => 'nullable|min:20|max:34', // Para IBAN
-            'observaciones' => 'nullable|max:1000',
+        $data = $request->validate([
+            'name'              => 'required|string|min:2|max:255',
+            'surname'           => 'required|string|min:2|max:255',
+            'dni'               => 'required|string|size:9|unique:workers,dni',
+            'telefono'          => 'nullable|string|min:9|max:15',
+            'email'             => 'nullable|email|max:255|unique:workers,email',
+            'seguridad_social'  => 'required|string|size:12|unique:workers,seguridad_social',
+            'cuenta_bancaria'   => 'nullable|string|min:20|max:34', // IBAN opcional
+            'observaciones'     => 'nullable|string|max:1000',
         ]);
 
-        Worker::create($validated);
+        Worker::create($data);
 
-        return redirect()->route('workers.index')
-            ->with('sweetalert', [
-                'title' => __('workers.created'),
-                'text' => '',
-                'type' => 'success'
-            ]);
+        return redirect()->route('workers.index')->with('ok', __('workers.created'));
     }
 
-    public function show(Worker $trabajador)
+    public function show(Worker $worker)
     {
-        return view('workers.show', compact('trabajador'));
+        return view('workers.show', compact('worker'));
     }
 
-    public function edit(Worker $trabajador)
+    public function edit(Worker $worker)
     {
-        return view('workers.edit', compact('trabajador'));
+        return view('workers.edit', compact('worker'));
     }
 
-   public function update(Request $request, Worker $trabajador)
+    public function update(Request $request, Worker $worker)
     {
         $data = $request->validate([
-            'name'              => ['required','string','max:120'],
-            'surname'           => ['required','string','max:150'],
-            'dni'               => ['required','string','max:20','unique:workers,dni,'.$trabajador->id],
-            'telefono'          => ['nullable','string','max:30'],
-            'email'             => ['nullable','email','max:255','unique:workers,email,'.$trabajador->id],
-            'seguridad_social'  => ['required','string','max:30','unique:workers,seguridad_social,'.$trabajador->id],
-            'cuenta_bancaria'   => ['required','string','max:34'],
-            'observaciones'     => ['nullable','string'],
+            'name'              => 'required|string|max:255',
+            'surname'           => 'required|string|max:255',
+            'dni'               => 'required|string|size:9|unique:workers,dni,' . $worker->id,
+            'telefono'          => 'nullable|string|min:9|max:15',
+            'email'             => 'nullable|email|max:255|unique:workers,email,' . $worker->id,
+            'seguridad_social'  => 'required|string|size:12|unique:workers,seguridad_social,' . $worker->id,
+            'cuenta_bancaria'   => 'nullable|string|min:20|max:34', // igual que en store
+            'observaciones'     => 'nullable|string|max:1000',
         ]);
 
-        $trabajador->update($data);
+        $worker->update($data);
 
-        return redirect()->route('workers.show', $trabajador)->with('ok','Trabajador actualizado.');
+        return redirect()->route('workers.index', ['worker' => $worker])->with('ok', __('workers.updated'));
     }
 
-    public function destroy(Worker $trabajador)
+    public function destroy(Worker $worker)
     {
-        $trabajador->delete();
-
-        return redirect()->route('workers.index')->with('ok', 'Trabajador eliminado.');
+        $worker->delete();
+        return redirect()->route('workers.index')->with('ok', __('workers.deleted'));
     }
-
 }
