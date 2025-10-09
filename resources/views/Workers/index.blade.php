@@ -104,6 +104,11 @@
                                             <td>{{ $trabajador->email ?? '—' }}</td>
                                             <td class="text-end pe-3">
                                                 <div class="d-inline-flex gap-2 justify-content-end">
+                                                    @can('workers_show')
+                                                        <a href="{{ route('workers.show', $trabajador->id) }}" class="btn btn-sm btn-info">
+                                                            Ver
+                                                        </a>
+                                                    @endcan
                                                     @can('workers_edit')
                                                         <a href="{{ route('workers.edit', $trabajador->id) }}" class="btn btn-sm btn-success">@lang('workers.edit')</a>
                                                     @endcan
