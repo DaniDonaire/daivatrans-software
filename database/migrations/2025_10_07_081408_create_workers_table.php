@@ -17,7 +17,7 @@ return new class extends Migration
 
             $table->string('name')->nullable();
             $table->string('surname')->nullable();
-            $table->string('dni')->unique();
+            $table->string('dni')->unique()->nullable();
             $table->string('telefono')->nullable();
             $table->string('email')->unique();
             $table->string('seguridad_social')->unique()->nullable();

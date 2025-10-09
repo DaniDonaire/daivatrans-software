@@ -83,12 +83,12 @@ class WorkerController extends Controller
         $data = $request->validate([
             'name'              => 'nullable|string',
             'surname'           => 'nullable|string',
-            'dni'               => 'nullable|string|unique:workers,dni',
+            'dni'               => 'nullable|string|unique:workers,dni,' . $worker->id,
             'telefono'          => 'nullable|string',
-            'email'             => 'required|email|max:255|unique:workers,email',
-            /*'seguridad_social'  => 'required|string|size:12|unique:workers,seguridad_social',
-            'cuenta_bancaria'   => 'nullable|string|min:20|max:34', // IBAN opcional
-            'observaciones'     => 'nullable|string|max:1000',*/
+            'email'             => 'required|email|max:255|unique:workers,email,' . $worker->id,
+            'seguridad_social'  => 'nullable|string|unique:workers,seguridad_social,' . $worker->id,
+            'cuenta_bancaria'   => 'nullable|string', // IBAN opcional
+            'observaciones'     => 'nullable|string|max:1000',
         ],
         [
             /*'dni.size'                 => 'El DNI debe tener :size caracteres.',

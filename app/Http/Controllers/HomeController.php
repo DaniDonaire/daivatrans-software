@@ -12,6 +12,8 @@ use App\Models\Audit;
 use Illuminate\Support\Facades\DB;
 use App\Models\Lead;
 use App\Models\Service;
+use App\Models\Worker;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -40,24 +42,26 @@ class HomeController extends Controller
 
     public function root()
     {
-        $totalLeads = Lead::count();
+        
+        $now = Carbon::now();
 
-        // Leads por servicio con eloquent
-        $leadsPorServicio = Service::query()
-            ->withCount('leads')                 
-            ->orderByDesc('leads_count')
-            ->get(['id', 'name'])               
-            ->map(function ($service) use ($totalLeads) {
-                return (object) [
-                    'servicio_nombre' => $service->name,
-                    'total_leads'     => $service->leads_count,
-                    'porcentaje'      => $totalLeads > 0
-                        ? round(($service->leads_count * 100) / $totalLeads, 1)
-                        : 0.0,
-                ];
-            });
+        $totalWorkers = Worker::count();
+        
+        // Trabajadores de hoy (ya está bien, solo comprueba la fecha exacta)
+        $workersToday = Worker::whereDate('created_at', Carbon::today())->count();
+        
+        // Trabajadores de esta semana (añadimos el año actual)
+        $workersThisWeek = Worker::whereBetween('created_at', [
+            $now->copy()->startOfWeek(),
+            $now->copy()->endOfWeek()
+        ])->count();
+        
+        // Trabajadores de este mes (añadimos el año actual)
+        $workersThisMonth = Worker::whereYear('created_at', $now->year)
+            ->whereMonth('created_at', $now->month)
+            ->count();
 
-        return view('index', compact('leadsPorServicio', 'totalLeads'));
+        return view('index', compact('totalWorkers', 'workersToday', 'workersThisWeek', 'workersThisMonth'));
     }
 
     public function lang($locale)
