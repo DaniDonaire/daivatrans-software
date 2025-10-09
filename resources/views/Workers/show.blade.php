@@ -23,6 +23,11 @@
                 <a href="{{ route('workers.index') }}" class="btn btn-secondary">
                     <i class="ri-arrow-left-line"></i> Volver
                 </a>
+                @can('workers_edit')
+                    <a href="{{ route('workers.edit', $worker->id) }}" class="btn btn-success">
+                        Editar
+                    </a>
+                @endcan
             </div>
         </div>
         <!-- End Col -->
@@ -97,7 +102,7 @@
                                             @if($worker->telefono)
                                                 <a href="tel:{{ $worker->telefono }}">{{ $worker->telefono }}</a>
                                             @else
-                                                <span class="text-muted">—</span>
+                                                <span class="text-muted"></span>
                                             @endif
                                         </div>
                                     </div>
@@ -110,7 +115,7 @@
                                             @if($worker->email)
                                                 <a href="mailto:{{ $worker->email }}">{{ $worker->email }}</a>
                                             @else
-                                                <span class="text-muted">—</span>
+                                                <span class="text-muted"></span>
                                             @endif
                                         </div>
                                     </div>
@@ -120,7 +125,7 @@
                                 <div class="col-lg-12">
                                     <div class="border rounded p-3 h-100">
                                         <div class="text-muted mb-1"><i class="ri-bank-card-line me-1"></i> Cuenta Bancaria</div>
-                                        <div class="fw-semibold">{{ $worker->cuenta_bancaria ?? '—' }}</div>
+                                        <div class="fw-semibold">{{ $worker->cuenta_bancaria ?? '' }}</div>
                                     </div>
                                 </div>
 
@@ -130,7 +135,7 @@
 
                                         @if($worker->address)
                                             <div class="fw-semibold mb-1">
-                                                {{ $worker->address->street ?? '—' }}
+                                                {{ $worker->address->street ?? '' }}
                                             </div>
                                             <div class="text-muted small">
                                                 {{ $worker->address->postal_code ?? '' }}
@@ -142,7 +147,7 @@
                                                 {{ $worker->address->country ?? '' }}
                                             </div>
                                         @else
-                                            <div class="text-muted">— No se ha registrado dirección —</div>
+                                            <div class="text-muted"></div>
                                         @endif
                                     </div>
                                 </div>

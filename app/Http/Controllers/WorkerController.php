@@ -130,7 +130,7 @@ class WorkerController extends Controller
         }
         
 
-        return redirect()->route('workers.index', ['worker' => $worker])->with('ok', __('workers.updated'));
+        return redirect()->route('workers.show', ['worker' => $worker])->with('ok', __('workers.updated'));
     }
 
 
