@@ -80,6 +80,20 @@ class WorkerController extends Controller
 
     public function update(Request $request, Worker $worker)
     {
+
+        if($request->ajax()) {
+            $data = $request->validate([
+                'observaciones' => 'nullable|string|max:1000'
+            ]);
+
+            $worker->update($data);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Observaciones actualizadas correctamente'
+            ]);
+        }
+
         $data = $request->validate([
             'name'              => 'nullable|string',
             'surname'           => 'nullable|string',
@@ -112,6 +126,7 @@ class WorkerController extends Controller
 
         return redirect()->route('workers.index', ['worker' => $worker])->with('ok', __('workers.updated'));
     }
+
 
     public function destroy(Worker $worker)
     {

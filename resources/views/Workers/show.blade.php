@@ -38,8 +38,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#notes" role="tab">
-                                <i class="ri-sticky-note-line me-1"></i> Notas
+                            <a class="nav-link" data-bs-toggle="tab" href="#observaciones" role="tab">
+                                <i class="ri-file-text-line me-1"></i> Observaciones
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#seguimiento" role="tab">
+                                <i class="ri-file-text-line me-1"></i> Seguimiento
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#documentos" role="tab">
+                                <i class="ri-file-text-line me-1"></i> Documentos
                             </a>
                         </li>
                     </ul>
@@ -130,12 +140,44 @@
                         <!-- End Worker Details Tab -->
 
                         <!-- Notes Tab -->
-                        <div class="tab-pane" id="notes" role="tabpanel">
-                            <div class="text-center text-muted">
-                                <p>Próximamente disponible</p>
-                            </div>
+                        <div class="tab-pane" id="observaciones" role="tabpanel">
+                            <form id="observacionesForm" action="{{ route('workers.update', $worker->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label for="observaciones" class="form-label">Observaciones del trabajador</label>
+                                            <textarea class="form-control" 
+                                                id="observaciones" 
+                                                name="observaciones" 
+                                                rows="6" 
+                                                style="resize: none;">{{ $worker->observaciones }}</textarea>
+                                        </div>
+                                        <div class="text-end">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="ri-save-line align-bottom me-1"></i> Guardar Observaciones
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- End Notes Tab -->
+                        <!-- seguimiento Tab -->
+                        <div class="tab-pane" id="seguimiento" role="tabpanel">
+                            <div class="row">
+                                <h5>Aqui veremos el seguimiento de los trabajadores</h5>
+                            </div>
+                        </div>
+                        <!-- End seguimiento Tab -->
+                        <!-- documentos Tab -->
+                        <div class="tab-pane" id="documentos" role="tabpanel">
+                            <div class="row">
+                                <h5>Aqui veremos los documentos de los trabajadores</h5>
+                            </div>
+                        </div>
+                        <!-- End documentos Tab -->
                     </div>
                 </div>
             </div>
@@ -147,4 +189,40 @@
 
 @section('script')
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
+
+    <script>
+        document.getElementById('observacionesForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    Swal.fire({
+                        title: 'Éxito',
+                        text: 'Las observaciones se han guardado correctamente',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Ha ocurrido un error al guardar las observaciones',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+            });
+        });
+    </script>
 @endsection
