@@ -99,7 +99,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                         <i class="las la-tachometer-alt"></i> <span>@lang('translation.dashboards')</span>
                     </a>
@@ -128,9 +128,9 @@
                             </li>
                         </ul>
                     </div>
-                </li> <!-- end Dashboard Menu -->
+                </li> <!-- end Dashboard Menu --> --}}
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
                         <i class="lab la-delicious"></i> <span>@lang('translation.apps')</span>
                     </a>
@@ -406,9 +406,9 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
                         <i class="las la-columns"></i> <span>@lang('translation.layouts')</span><span class="badge badge-pill bg-danger">@lang('translation.hot')</span>
                     </a>
@@ -428,11 +428,11 @@
                             </li>
                         </ul>
                     </div>
-                </li> <!-- end Dashboard Menu -->
+                </li> <!-- end Dashboard Menu --> --}}
 
-                <li class="menu-title"><i class="ri-more-fill"></i> <span>@lang('translation.pages')</span></li>
+                {{-- <li class="menu-title"><i class="ri-more-fill"></i> <span>@lang('translation.pages')</span></li> --}}
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarAuth" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAuth">
                         <i class="lar la-user-circle"></i> <span>@lang('translation.authentication')</span>
                     </a>
@@ -579,9 +579,9 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarPages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarPages">
                         <i class="las la-pager"></i> <span>@lang('translation.pages')</span>
                     </a>
@@ -636,9 +636,9 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLanding">
                         <i class="ri-rocket-line"></i> <span>@lang('translation.landing')</span>
                     </a>
@@ -656,9 +656,9 @@
                         </ul>
                     </div>
                 </li>
-                <li class="menu-title"><i class="ri-more-fill"></i> <span>@lang('translation.components')</span></li>
+                <li class="menu-title"><i class="ri-more-fill"></i> <span>@lang('translation.components')</span></li> --}}
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarUI">
                         <i class="las la-pencil-ruler"></i> <span>@lang('translation.base-ui')</span>
                     </a>
@@ -996,7 +996,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
             </ul>
         </div>
