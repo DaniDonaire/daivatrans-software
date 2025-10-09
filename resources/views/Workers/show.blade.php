@@ -124,6 +124,29 @@
                                     </div>
                                 </div>
 
+                                <div class="col-lg-12">
+                                    <div class="border rounded p-3 h-100">
+                                        <div class="text-muted mb-2"><i class="ri-map-pin-line me-1"></i> Dirección</div>
+
+                                        @if($worker->address)
+                                            <div class="fw-semibold mb-1">
+                                                {{ $worker->address->street ?? '—' }}
+                                            </div>
+                                            <div class="text-muted small">
+                                                {{ $worker->address->postal_code ?? '' }}
+                                                {{ $worker->address->city ?? '' }} 
+                                                @if($worker->address->province)
+                                                    ({{ $worker->address->province }})
+                                                @endif
+                                                <br>
+                                                {{ $worker->address->country ?? '' }}
+                                            </div>
+                                        @else
+                                            <div class="text-muted">— No se ha registrado dirección —</div>
+                                        @endif
+                                    </div>
+                                </div>
+
                                 <!-- Observaciones -->
                                 @if($worker->observaciones)
                                     <div class="col-12">
@@ -135,6 +158,7 @@
                                         </div>
                                     </div>
                                 @endif
+
                             </div>
                         </div>
                         <!-- End Worker Details Tab -->

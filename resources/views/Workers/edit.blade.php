@@ -96,6 +96,61 @@
               </div>
             </div>
 
+            <hr class="my-4">
+            <h5 class="text-primary">Dirección del trabajador</h5>
+
+            <div class="row g-3 mt-0">
+              <div class="col-md-6">
+                <label for="street" class="form-label">Calle y número</label>
+                <input type="text" id="street" name="address[street]"
+                       class="form-control @error('address.street') is-invalid @enderror"
+                       value="{{ old('address.street', optional($worker->address)->street) }}"
+                       placeholder="Ej. Calle Mayor 15">
+                @error('address.street') <div class="invalid-feedback">{{ $message }}</div> @enderror
+              </div>
+
+              <div class="col-md-6">
+                <label for="postal_code" class="form-label">Código postal</label>
+                <input type="text" id="postal_code" name="address[postal_code]"
+                       class="form-control @error('address.postal_code') is-invalid @enderror"
+                       value="{{ old('address.postal_code', optional($worker->address)->postal_code) }}"
+                       placeholder="Ej. 08800">
+                @error('address.postal_code') <div class="invalid-feedback">{{ $message }}</div> @enderror
+              </div>
+            </div>
+
+            <div class="row g-3 mt-0">
+              <div class="col-md-4">
+                <label for="city" class="form-label">Ciudad</label>
+                <input type="text" id="city" name="address[city]"
+                       class="form-control @error('address.city') is-invalid @enderror"
+                       value="{{ old('address.city', optional($worker->address)->city) }}"
+                       placeholder="Ej. Vilanova i la Geltrú">
+                @error('address.city') <div class="invalid-feedback">{{ $message }}</div> @enderror
+              </div>
+
+              <div class="col-md-4">
+                <label for="province" class="form-label">Provincia</label>
+                <input type="text" id="province" name="address[province]"
+                       class="form-control @error('address.province') is-invalid @enderror"
+                       value="{{ old('address.province', optional($worker->address)->province) }}"
+                       placeholder="Ej. Barcelona">
+                @error('address.province') <div class="invalid-feedback">{{ $message }}</div> @enderror
+              </div>
+
+              <div class="col-md-4">
+                <label for="country" class="form-label">País</label>
+                <input type="text" id="country" name="address[country]"
+                       class="form-control @error('address.country') is-invalid @enderror"
+                       value="{{ old('address.country', optional($worker->address)->country ?? 'España') }}"
+                       placeholder="Ej. España">
+                @error('address.country') <div class="invalid-feedback">{{ $message }}</div> @enderror
+              </div>
+            </div>
+
+            <hr class="my-4">
+            <h5 class="text-primary">Observaciones</h5>
+
             {{-- Fila 5: Observaciones (toda la fila) --}}
             <div class="row g-3 mt-0">
               <div class="col-12">

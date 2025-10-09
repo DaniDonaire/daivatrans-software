@@ -23,9 +23,9 @@ class Worker extends Model
         'cuenta_bancaria' => 'encrypted:string',
     ];
 
-    /*
-    public function direccion()
+    public function address()
     {
-        return $this->hasOne(Direccion::class);
-    }*/
+        return $this->hasOne(Address::class);
+    }
+
 }
