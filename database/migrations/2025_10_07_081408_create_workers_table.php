@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('name');
-            $table->string('surname');
-            $table->string('dni', 9)->unique();
-            $table->string('telefono', 15)->nullable();
+            $table->string('name')->nullable();
+            $table->string('surname')->nullable();
+            $table->string('dni')->unique();
+            $table->string('telefono')->nullable();
             $table->string('email')->unique();
-            $table->string('seguridad_social', 12)->unique();
-            $table->text('cuenta_bancaria');
+            $table->string('seguridad_social')->unique()->nullable();
+            $table->text('cuenta_bancaria')->nullable();
             $table->text('observaciones')->nullable();
 
         });
