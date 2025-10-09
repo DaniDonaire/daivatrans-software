@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('city')->nullable();         // Ciudad o pueblo
             $table->string('province')->nullable();     // Provincia
             $table->string('postal_code')->nullable();  // Código postal
-            $table->string('country')->default('España');
+            $table->string('country')->nullable();
         });
     }
 

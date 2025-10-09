@@ -80,6 +80,7 @@ class WorkerController extends Controller
     public function update(Request $request, Worker $worker)
     {
 
+        //Actualizar observaciones con Ajax
         if($request->ajax()) {
             $data = $request->validate([
                 'observaciones' => 'nullable|string|max:1000'
@@ -109,32 +110,25 @@ class WorkerController extends Controller
             'address.country' => 'nullable|string|max:100',
         ],
         [
-            /*'dni.size'                 => 'El DNI debe tener :size caracteres.',
-            'dni.required'              => 'El DNI es obligatorio.',
-            'seguridad_social.size'    => 'El Nº de Seguridad Social debe tener :size dígitos.',
-            'telefono.min'             => 'El teléfono debe tener al menos :min caracteres.',
-            'telefono.max'             => 'El teléfono no puede superar :max caracteres.',
-            'cuenta_bancaria.min'      => 'El IBAN debe tener al menos :min caracteres.',
-            'cuenta_bancaria.max'      => 'El IBAN no puede superar :max caracteres.',*/
             'email.email'              => 'Introduce un correo válido.',
             'email.required'           => 'El correo es obligatorio.',
             'email.unique'             => 'Este correo ya está registrado.',
             'dni.unique'               => 'Este DNI ya existe.',
             'seguridad_social.unique'  => 'Ese Nº de Seguridad Social ya existe.',
-            // 'seguridad_social.required' => 'El Nº de Seguridad Social es obligatorio.',
             'name.required'            => 'El nombre es obligatorio.',
             'surname.required'         => 'Los apellidos son obligatorios.',
         ]);
 
         $worker->update($data);
 
-        $addressData = array_filter($data['address'] ?? [], fn ($v) => filled($v));
+        $addressData = $data['address'] ?? [];
 
-        if (!empty($addressData)) {
-            $worker->address()->updateOrCreate([], $addressData);
+        if ($worker->address) {
+            $worker->address->update($addressData);
         } else {
-            $worker->address()?->delete();
+            $worker->address()->create($addressData);
         }
+        
 
         return redirect()->route('workers.index', ['worker' => $worker])->with('ok', __('workers.updated'));
     }

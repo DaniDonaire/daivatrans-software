@@ -142,7 +142,7 @@
                 <label for="country" class="form-label">País</label>
                 <input type="text" id="country" name="address[country]"
                        class="form-control @error('address.country') is-invalid @enderror"
-                       value="{{ old('address.country', optional($worker->address)->country ?? 'España') }}"
+                       value="{{ old('address.country', optional($worker->address)->country) }}"
                        placeholder="Ej. España">
                 @error('address.country') <div class="invalid-feedback">{{ $message }}</div> @enderror
               </div>
